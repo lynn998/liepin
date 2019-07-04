@@ -4,10 +4,10 @@ from bs4 import BeautifulSoup
 import re
 import random
 import time
-import os
-path = os.path.abspath(os.path.join(os.getcwd(),"../.."))
-import sys
-sys.path.append(path)
+#import os
+#path = os.path.abspath(os.path.join(os.getcwd(),"../.."))
+#import sys
+#sys.path.append(path)
 from liepin.items import LiepinItem
 #import main
 
@@ -67,9 +67,10 @@ headers = {
 class LiepinSpider(scrapy.Spider):
     name = 'liepin'
     url0 = 'https://www.liepin.com'
-    url1 = 'https://www.liepin.com/zhaopin/?isAnalysis=&dqs=020&pubTime=&salary=&subIndustry=&industryType=&compscale=&key=python+%E6%95%B0%E6%8D%AE&init=-1&searchType=1&headckid=3a01c1305fbdb82d&compkind=&fromSearchBtn=2&sortFlag=15&ckid=3a01c1305fbdb82d&degradeFlag=0&jobKind=&industries=&clean_condition=&siTag=OtDZYln6raiWh2NGqeOwFg~r3i1HcfrfE3VRWBaGW6LoA&d_sfrom=search_prime&d_ckId=71fbc11396ad17db29c7d234740c86b1&d_curPage=99&d_pageSize=40&d_headId=71fbc11396ad17db29c7d234740c86b1&curPage='
-    page = 27
-    page_max = 99
+    url1 = 'https://www.liepin.com/zhaopin/?isAnalysis=&dqs=020&pubTime=&salary=&subIndustry=&industryType=&compscale=&key=python&init=-1&searchType=1&headckid=e685f3c49cd5e997&compkind=&fromSearchBtn=2&sortFlag=15&ckid=e685f3c49cd5e997&degradeFlag=0&jobKind=&industries=&clean_condition=&siTag=I-7rQ0e90mv8a37po7dV3Q~r3i1HcfrfE3VRWBaGW6LoA&d_sfrom=search_prime&d_ckId=3a692788a83669c4ae2fd45d875169fd&d_curPage=0&d_pageSize=40&d_headId=3a692788a83669c4ae2fd45d875169fd&curPage='
+#   'https://www.liepin.com/zhaopin/?isAnalysis=&dqs=020&pubTime=&salary=&subIndustry=&industryType=&compscale=&key=python+%E6%95%B0%E6%8D%AE&init=-1&searchType=1&headckid=3a01c1305fbdb82d&compkind=&fromSearchBtn=2&sortFlag=15&ckid=3a01c1305fbdb82d&degradeFlag=0&jobKind=&industries=&clean_condition=&siTag=OtDZYln6raiWh2NGqeOwFg~r3i1HcfrfE3VRWBaGW6LoA&d_sfrom=search_prime&d_ckId=71fbc11396ad17db29c7d234740c86b1&d_curPage=99&d_pageSize=40&d_headId=71fbc11396ad17db29c7d234740c86b1&curPage='
+    page = 0
+    page_max = 1
    
     def parse(self,response):
         item = LiepinItem()
@@ -77,7 +78,7 @@ class LiepinSpider(scrapy.Spider):
 #        from scrapy.shell import inspect_response
 #        inspect_response(response,self)                ##debug 
         job_list = response.css('ul.sojob-list') ## response.xpath('//ul[@class="sojob-list"]')
-        for i in range(1,41):
+        for i in range(1,4):
             positionName = job_list.css('li:nth-child({}) h3 a::text'.format(str(i))).extract()
             positionFrom = job_list.css('li:nth-child({}) i.icon b::text'.format(str(i))).extract()
             salary = job_list.css('li:nth-child({}) p.condition span.text-warning::text'.format(str(i))).extract()

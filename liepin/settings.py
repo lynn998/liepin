@@ -65,7 +65,8 @@ DOWNLOAD_DELAY = 1
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'liepin.pipelines.GetLiepinPipeline': 300,
+    'liepin.pipelines.PipelineSqlite3': 300,
+#    'liepin.pipelines.GetLiepinPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
