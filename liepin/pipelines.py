@@ -6,6 +6,10 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import pymysql
 import re
+from liepin.local_settings import sqlite3_path
+
+class PipelineSqlite3(object):
+    
 
 class GetLiepinPipeline(object):
     def table_exists(self,con,table_name):
@@ -61,3 +65,6 @@ class GetLiepinPipeline(object):
         connect.commit()
         con.close()
         connect.close()
+
+
+
